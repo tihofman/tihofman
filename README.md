@@ -1,3 +1,55 @@
+# Timm Hofmann - Portfolio Repository
+
+[![CI](https://github.com/tihofman/tihofman/actions/workflows/ci.yml/badge.svg)](https://github.com/tihofman/tihofman/actions/workflows/ci.yml)
+[![Docker](https://github.com/tihofman/tihofman/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/tihofman/tihofman/actions/workflows/docker-publish.yml)
+
+## 📁 Repository Structure
+
+This repository contains multiple projects:
+
+- **`/web`** - Personal webpage built with Astro
+  - Modern, performant portfolio website
+  - Full German/English internationalization
+  - Automated CI/CD with GitHub Actions
+  - Docker containerization with nginx
+  - [View Documentation](./web/README.md)
+
+## 🚀 Quick Start
+
+### Personal Webpage
+
+```bash
+# Navigate to the web project
+cd web
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Or run with Docker from root
+docker-compose up -d
+```
+
+Visit `http://localhost:4321` (dev) or `http://localhost:8080` (Docker)
+
+### Automated Deployments
+
+Every push to `main` automatically:
+- ✅ Builds and tests the project
+- ✅ Creates Docker images for amd64 and arm64
+- ✅ Pushes to GitHub Container Registry
+- ✅ Tags with version numbers and commit SHAs
+
+Pull the latest image:
+```bash
+docker pull ghcr.io/tihofman/tihofman:latest
+docker run -d -p 8080:80 ghcr.io/tihofman/tihofman:latest
+```
+
+---
+
 # 💫 About Me:
 Currently working for compeople<br>Learning about AI, Rust, Vue
 
