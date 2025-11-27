@@ -1,0 +1,81 @@
+---
+import { getLangFromUrl } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
+
+// Generate alternate language URL
+const getAlternateUrl = () => {
+  if (lang === 'de') {
+    return '/en' + currentPath;
+  } else {
+    return currentPath.replace('/en', '') || '/';
+  }
+};
+
+const alternateUrl = getAlternateUrl();
+---
+
+<div class="language-switcher">
+  <a
+    href={alternateUrl}
+    class="language-toggle"
+    aria-label={lang === 'de' ? 'Switch to English' : 'Wechseln zu Deutsch'}
+  >
+    <span class:list={['lang-option', { active: lang === 'de' }]}>DE</span>
+    <span class="separator">/</span>
+    <span class:list={['lang-option', { active: lang === 'en' }]}>EN</span>
+  </a>
+</div>
+
+<style>
+  .language-switcher {
+    position: fixed;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    z-index: 50;
+  }
+
+  @media (min-width: 768px) {
+    .language-switcher {
+      top: var(--spacing-2xl);
+      right: var(--spacing-2xl);
+    }
+  }
+
+  .language-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    text-decoration: none;
+    transition: all var(--transition-base);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .language-toggle:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  .lang-option {
+    color: var(--color-neutral-500);
+    transition: color var(--transition-fast);
+  }
+
+  .lang-option.active {
+    color: var(--color-primary-600);
+  }
+
+  .separator {
+    color: var(--color-neutral-300);
+  }
+
+  .language-toggle:hover .lang-option:not(.active) {
+    color: var(--color-neutral-700);
+  }
+</style>
