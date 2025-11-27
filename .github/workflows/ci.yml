@@ -1,0 +1,95 @@
+name: CI - Build and Test
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18, 20]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install dependencies
+        working-directory: web
+        run: npm ci
+
+      - name: Build project
+        working-directory: web
+        run: npm run build
+
+      - name: Run tests
+        working-directory: web
+        run: npm test --if-present
+
+      - name: Check build output
+        working-directory: web
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "Error: dist directory not found"
+            exit 1
+          fi
+          if [ ! -f "dist/index.html" ]; then
+            echo "Error: index.html not found in dist"
+            exit 1
+          fi
+          if [ ! -f "dist/en/index.html" ]; then
+            echo "Error: en/index.html not found in dist"
+            exit 1
+          fi
+          echo "Build output verified successfully"
+
+      - name: Upload build artifacts
+        if: matrix.node-version == 20
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: web/dist/
+          retention-days: 7
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install dependencies
+        working-directory: web
+        run: npm ci
+
+      - name: Check formatting (if available)
+        working-directory: web
+        run: npm run format:check --if-present
+        continue-on-error: true
+
+      - name: Lint (if available)
+        working-directory: web
+        run: npm run lint --if-present
+        continue-on-error: true
