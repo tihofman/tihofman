@@ -1,0 +1,146 @@
+---
+import type { Project } from '../data/projects';
+
+export interface Props {
+  project: Project;
+  lang: 'de' | 'en';
+}
+
+const { project, lang } = Astro.props;
+---
+
+<article
+  class="project-card"
+  data-project-id={project.id}
+  role="button"
+  tabindex="0"
+  aria-label={`${project.company} - ${project.role[lang]}`}
+>
+  <div class="project-card-content">
+    <div class="project-header">
+      <h3 class="project-company">{project.company}</h3>
+      <span class="project-timespan">{project.timespan[lang]}</span>
+    </div>
+
+    <p class="project-role">{project.role[lang]}</p>
+
+    <div class="project-tech">
+      {
+        project.keyTech.slice(0, 5).map((tech) => (
+          <span class="tech-tag">{tech}</span>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="project-card-arrow">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </div>
+</article>
+
+<style>
+  .project-card {
+    position: relative;
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-lg);
+    border: 2px solid transparent;
+  }
+
+  .project-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+    border-color: var(--color-primary-200);
+  }
+
+  .project-card:focus-visible {
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: 2px;
+  }
+
+  .project-card-content {
+    flex: 1;
+  }
+
+  .project-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+  }
+
+  @media (min-width: 640px) {
+    .project-header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .project-company {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-neutral-900);
+    margin: 0;
+  }
+
+  .project-timespan {
+    font-size: 0.875rem;
+    color: var(--color-neutral-600);
+    font-weight: 500;
+  }
+
+  .project-role {
+    color: var(--color-primary-700);
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    font-size: 1rem;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+  }
+
+  .tech-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--color-neutral-100);
+    color: var(--color-neutral-700);
+    border-radius: var(--radius-sm);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    font-family: var(--font-mono);
+  }
+
+  .project-card-arrow {
+    color: var(--color-neutral-400);
+    transition: all var(--transition-base);
+    flex-shrink: 0;
+  }
+
+  .project-card:hover .project-card-arrow {
+    color: var(--color-primary-600);
+    transform: translateX(4px);
+  }
+</style>

@@ -1,0 +1,117 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { projects } from '../data/projects';
+import ProjectCard from './ProjectCard.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section class="projects" id="projects">
+  <div class="projects-content container-responsive">
+    <h2 class="projects-title">{t('projects.title')}</h2>
+
+    <div class="timeline">
+      <div class="timeline-line"></div>
+      {
+        projects.map((project, index) => (
+          <div class="timeline-item" style={`--index: ${index}`}>
+            <div class="timeline-dot" />
+            <ProjectCard project={project} lang={lang} />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects {
+    padding-block: var(--spacing-3xl);
+    background: var(--color-neutral-50);
+  }
+
+  .projects-content {
+    max-width: 1000px;
+  }
+
+  .projects-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+    color: var(--color-neutral-900);
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: var(--spacing-xl);
+  }
+
+  @media (min-width: 768px) {
+    .timeline {
+      padding-left: var(--spacing-3xl);
+    }
+  }
+
+  .timeline-line {
+    position: absolute;
+    left: 12px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(
+      to bottom,
+      var(--color-primary-300),
+      var(--color-primary-100)
+    );
+  }
+
+  @media (min-width: 768px) {
+    .timeline-line {
+      left: 24px;
+    }
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: var(--spacing-2xl);
+    animation: fadeInUp 0.6s ease-out backwards;
+    animation-delay: calc(var(--index) * 0.1s);
+  }
+
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -34px;
+    top: 28px;
+    width: 16px;
+    height: 16px;
+    background: var(--color-primary-500);
+    border: 3px solid white;
+    border-radius: 50%;
+    box-shadow: var(--shadow-md);
+    z-index: 1;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-dot {
+      left: -46px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import LanguageSwitcher from '../../components/LanguageSwitcher.astro';
+import Hero from '../../components/Hero.astro';
+import Skills from '../../components/Skills.astro';
+import ProjectTimeline from '../../components/ProjectTimeline.astro';
+import ProjectModal from '../../components/ProjectModal.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = 'Timm Hofmann - Fullstack Software Engineer & Cloud Architect';
+const description =
+  'Building robust and scalable software solutions from backend architecture to frontend implementation.';
+---
+
+<Layout title={title} description={description}>
+  <LanguageSwitcher />
+  <Hero />
+  <Skills />
+  <ProjectTimeline />
+  <ProjectModal />
+  <Footer />
+</Layout>
