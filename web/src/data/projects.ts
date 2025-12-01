@@ -25,8 +25,8 @@ export const projects: Project[] = [
   {
     id: 'compeople-gmbh-2024',
     role: {
-      de: 'Seniot Fullstack Software Engineer'
-      en: 'Seniot Fullstack Software Engineer'
+      de: 'Senior Fullstack Software Engineer'
+      en: 'Senior Fullstack Software Engineer'
     },
     company: 'compeople GmbH',
     timespan: {
@@ -34,7 +34,7 @@ export const projects: Project[] = [
       en: '2025 - Present'
     },
     summary: {
-      'de': 'Full-Stack-Entwicklung, Architekturplanung und Implementierung in Kundenprojekten.',
+      de: 'Full-Stack-Entwicklung, Architekturplanung und Implementierung in Kundenprojekten.',
       en: 'Full-Stack development, architectural planning, and implementation in customer projects.'
     },
     responsibilities: {
@@ -57,8 +57,8 @@ export const projects: Project[] = [
   {
     id: 'dvag-2025',
     role: {
-      de: 'Technical Lead',
-      en: 'Technical Lead'
+      de: 'Fullstack Sofware Engineer',
+      en: 'Fullstack Sofware Engineer'
     },
     company: 'DVAG, Frankfurt',
     timespan: {
