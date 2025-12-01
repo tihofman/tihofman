@@ -23,6 +23,82 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: 'compeople-gmbh-2024',
+    role: {
+      de: 'Seniot Fullstack Software Engineer'
+      en: 'Seniot Fullstack Software Engineer'
+    },
+    company: 'compeople GmbH',
+    timespan: {
+      de: '2025 - laufend',
+      en: '2025 - Present'
+    },
+    summary: {
+      'de': 'Full-Stack-Entwicklung, Architekturplanung und Implementierung in Kundenprojekten.',
+      en: 'Full-Stack development, architectural planning, and implementation in customer projects.'
+    },
+    responsibilities: {
+      de: [
+        'Entwicklung von Full-Stack-Lösungen für diverse Kundenprojekte',
+        'Architekturplanung und technische Konzeption',
+        'Implementierung moderner Softwarelösungen',
+        'Zusammenarbeit mit interdisziplinären Teams'
+      ],
+      en: [
+        'Development of Full-Stack solutions for various customer projects',
+        'Architectural planning and technical design',
+        'Implementation of modern software solutions',
+        'Collaboration with interdisciplinary teams'
+      ]
+    },
+    keyTech: ['Java', 'Kotlin', 'Spring Boot'],
+    fullTechStack: ['Java', 'Kotlin', 'Spring Boot', 'Microservices', 'REST APIs', 'Git']
+  },
+  {
+    id: 'dvag-2025',
+    role: {
+      de: 'Technical Lead',
+      en: 'Technical Lead'
+    },
+    company: 'DVAG, Frankfurt',
+    timespan: {
+      de: '02/2025 - laufend',
+      en: '02/2025 - Present'
+    },
+    summary: {
+      de: 'Fullstack-Entwicklung im Prio-0-Projekt mit Fokus auf Backend (PSQL-Datenbank, Kafka-Anbindung) und API-First-Ansatz; zusätzlich Konzeption und Implementierung des „Service-Wrappers“ zur Bündelung externer Generali-Services als Standalone-Webkomponente für die DVAG-Landschaft.',
+      en: 'Full-stack development in the priority project with a focus on backend (PostgreSQL database, Kafka integration) and API-first approach; additionally responsible for the design and implementation of the “Service Wrapper,” which consolidates external Generali services and provides them as a standalone web component for use within the DVAG system landscape.'
+    },
+    responsibilities: {
+      de: [
+        'Full-stack development in the priority project "Contract Service"',
+        'Backend implementation with PostgreSQL (PSQL) database setup and extension',
+        'Integration of Kafka for messaging and data streaming',
+        'API development following an API-first approach, including controller generation using OpenAPI',
+        'Design and implementation of the "Service Wrapper" to bundle external Generali services',
+        'Ensure facade-style access for internal DVAG systems via the Service Wrapper',
+        'Collaboration and alignment with Generali stakeholders',
+        'Deliver the Service Wrapper as a standalone application and Web Component',
+        'Conceptual work and technical decision-making for architecture and deployment',
+        'Close cooperation with project management (PM: Andre Dienst) and team members'
+      ],
+      en: [
+        'Full-stack development in the priority project "Contract Service"',
+        'Backend implementation with PostgreSQL (PSQL) database setup and extension',
+        'Integration of Kafka for messaging and data streaming',
+        'API development following an API-first approach, including controller generation using OpenAPI',
+        'Design and implementation of the "Service Wrapper" to bundle external Generali services',
+        'Ensure facade-style access for internal DVAG systems via the Service Wrapper',
+        'Collaboration and alignment with Generali stakeholders',
+        'Deliver the Service Wrapper as a standalone application and Web Component',
+        'Conceptual work and technical decision-making for architecture and deployment',
+        'Close cooperation with project management (PM: Andre Dienst) and team members'
+      ]
+    },
+    keyTech: ['Azure', 'Kafka', 'Java', 'Angular'],
+    fullTechStack: ['Kotlin', 'Kafka', 'PSQL', 'Spring Boot', 'Angular', 'Typescript', 'Azure K8s', 'Azure Keyvault', 'Helm', 'Playwright', 'Node', 'NPX', 'Mockito', 'Hibernate', 'OpenApi', 'Docker', 'Wiremock']
+  },
+  {
     id: 'sn-gmbh-2024',
     role: {
       de: 'Senior Software Engineer',
@@ -30,8 +106,8 @@ export const projects: Project[] = [
     },
     company: 'S&N GmbH, Eschborn',
     timespan: {
-      de: '2024 - laufend',
-      en: '2024 - Present'
+      de: '2024 - 2025',
+      en: '2024 - 2025'
     },
     summary: {
       de: 'Full-Stack-Entwicklung, Architekturplanung und Implementierung in Kundenprojekten.',
@@ -128,8 +204,8 @@ export const projects: Project[] = [
     },
     company: 'BaFin, Frankfurt',
     timespan: {
-      de: '02/2023 - laufend',
-      en: '02/2023 - Present'
+      de: '02/2023 - 01/2025',
+      en: '02/2023 - 01/2025'
     },
     summary: {
       de: 'Verbesserung der externen Präsenz der BaFin auf europäischer Ebene durch Implementierung eines Microprofile-Webservices für die Systemintegration.',
@@ -252,7 +328,7 @@ export const projects: Project[] = [
       ]
     },
     keyTech: ['Azure', 'Batch Processing', 'Java'],
-    fullTechStack: ['Azure', 'Azure Batch', 'Spring Batch', 'Java', 'SQL Server', 'Event Hub', 'Storage Accounts']
+    fullTechStack: ['Azure', 'Azure Batch', 'Spring Batch', 'Java', 'SQL Server', 'Event Hub', 'Storage Accounts', 'Angular']
   },
   {
     id: 'drv-2019',
