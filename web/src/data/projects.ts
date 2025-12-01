@@ -25,7 +25,7 @@ export const projects: Project[] = [
   {
     id: 'compeople-gmbh-2024',
     role: {
-      de: 'Senior Fullstack Software Engineer'
+      de: 'Senior Fullstack Software Engineer',
       en: 'Senior Fullstack Software Engineer'
     },
     company: 'compeople GmbH',
