@@ -1,75 +1,181 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
-import { skills } from '../data/projects';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const skillGroups = [
+  {
+    label: 'Backend',
+    skills: ['Java', 'Kotlin', 'Spring Boot', 'Microprofile', 'REST APIs', 'Microservices'],
+  },
+  {
+    label: 'Cloud & DevOps',
+    skills: ['Kubernetes', 'Docker', 'Helm', 'Terraform', 'Azure', 'AWS', 'CI/CD', 'DevOps'],
+  },
+  {
+    label: 'Frontend',
+    skills: ['Angular', 'TypeScript'],
+  },
+  {
+    label: 'Data & Tools',
+    skills: ['PostgreSQL', 'Git', 'GitHub Actions', 'Jenkins'],
+  },
+  {
+    label: 'Methodology',
+    skills: ['SCRUM', 'Agile'],
+  },
+];
 ---
 
 <section class="skills" id="skills">
-  <div class="skills-content container-responsive">
-    <h2 class="skills-title">{t('skills.title')}</h2>
-    <div class="skills-grid">
-      {
-        skills.map((skill) => (
-          <div class="skill-tag">
-            <span>{skill}</span>
+  <div class="skills-inner container-responsive">
+
+    <header class="section-header">
+      <span class="section-number" aria-hidden="true">01</span>
+      <h2 class="section-title">{t('skills.title')}</h2>
+    </header>
+
+    <div class="skill-groups" role="list">
+      {skillGroups.map((group, i) => (
+        <div class="skill-group" role="listitem" style={`--i: ${i}`}>
+          <span class="group-label">{group.label}</span>
+          <div class="group-tags">
+            {group.skills.map(skill => (
+              <span class="skill-tag">{skill}</span>
+            ))}
           </div>
-        ))
-      }
+        </div>
+      ))}
     </div>
+
   </div>
 </section>
 
 <style>
   .skills {
     padding-block: var(--spacing-3xl);
-    background: white;
+    border-bottom: 1px solid var(--color-border);
   }
 
-  .skills-content {
+  .skills-inner {
     max-width: 1200px;
   }
 
-  .skills-title {
-    font-size: clamp(2rem, 5vw, 3rem);
-    text-align: center;
-    margin-bottom: var(--spacing-2xl);
-    color: var(--color-neutral-900);
+  /* ── Section header ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-3xl);
   }
 
-  .skills-grid {
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 5vw, 3rem);
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+    flex: 1;
+  }
+
+  /* ── Skill groups ── */
+  .skill-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .skill-group {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: var(--spacing-xl);
+    align-items: start;
+    padding-block: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+    animation: fadeInRow 0.5s ease-out backwards;
+    animation-delay: calc(var(--i) * 0.08s);
+  }
+
+  .skill-group:last-child {
+    border-bottom: none;
+  }
+
+  .group-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+    padding-top: 0.35rem;
+    flex-shrink: 0;
+  }
+
+  .group-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--spacing-md);
-    justify-content: center;
+    gap: 0.5rem;
   }
 
   .skill-tag {
     display: inline-flex;
     align-items: center;
-    padding: var(--spacing-sm) var(--spacing-lg);
-    background: var(--color-primary-50);
-    border: 2px solid var(--color-primary-100);
-    border-radius: var(--radius-lg);
-    font-weight: 600;
-    color: var(--color-primary-700);
-    font-size: 0.9rem;
+    padding: 0.3rem 0.75rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
     transition: all var(--transition-base);
     cursor: default;
   }
 
   .skill-tag:hover {
-    background: var(--color-primary-100);
-    border-color: var(--color-primary-200);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background: var(--color-accent-glow);
   }
 
-  @media (min-width: 768px) {
-    .skill-tag {
-      font-size: 1rem;
-      padding: var(--spacing-md) var(--spacing-xl);
+  @keyframes fadeInRow {
+    from {
+      opacity: 0;
+      transform: translateX(-12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .skill-group {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-sm);
+    }
+
+    .section-header {
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    .section-title {
+      border-bottom: none;
+      padding-bottom: 0;
     }
   }
 </style>

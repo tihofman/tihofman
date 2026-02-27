@@ -8,110 +8,115 @@ const t = useTranslations(lang);
 ---
 
 <section class="projects" id="projects">
-  <div class="projects-content container-responsive">
-    <h2 class="projects-title">{t('projects.title')}</h2>
+  <div class="projects-inner container-responsive">
 
-    <div class="timeline">
-      <div class="timeline-line"></div>
-      {
-        projects.map((project, index) => (
-          <div class="timeline-item" style={`--index: ${index}`}>
-            <div class="timeline-dot" />
-            <ProjectCard project={project} lang={lang} />
-          </div>
-        ))
-      }
+    <header class="section-header">
+      <span class="section-number" aria-hidden="true">02</span>
+      <h2 class="section-title">{t('projects.title')}</h2>
+    </header>
+
+    <div class="projects-grid">
+      {projects.map((project, index) => (
+        <div class="grid-item" style={`--index: ${index}`}>
+          <ProjectCard project={project} lang={lang} />
+        </div>
+      ))}
     </div>
+
   </div>
 </section>
 
 <style>
   .projects {
     padding-block: var(--spacing-3xl);
-    background: var(--color-neutral-50);
+    border-bottom: 1px solid var(--color-border);
   }
 
-  .projects-content {
-    max-width: 1000px;
+  .projects-inner {
+    max-width: 1280px;
   }
 
-  .projects-title {
-    font-size: clamp(2rem, 5vw, 3rem);
-    text-align: center;
+  /* ── Section header ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-lg);
     margin-bottom: var(--spacing-3xl);
-    color: var(--color-neutral-900);
   }
 
-  .timeline {
-    position: relative;
-    padding-left: var(--spacing-xl);
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+    flex-shrink: 0;
   }
 
-  @media (min-width: 768px) {
-    .timeline {
-      padding-left: var(--spacing-3xl);
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 5vw, 3rem);
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+    flex: 1;
+  }
+
+  /* ── Grid ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  @media (min-width: 640px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  .timeline-line {
-    position: absolute;
-    left: 12px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(
-      to bottom,
-      var(--color-primary-300),
-      var(--color-primary-100)
-    );
-  }
-
-  @media (min-width: 768px) {
-    .timeline-line {
-      left: 24px;
+  @media (min-width: 1024px) {
+    .projects-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
-  .timeline-item {
-    position: relative;
-    margin-bottom: var(--spacing-2xl);
-    animation: fadeInUp 0.6s ease-out backwards;
-    animation-delay: calc(var(--index) * 0.1s);
+  .grid-item {
+    animation: fadeInCard 0.5s ease-out backwards;
+    animation-delay: calc(var(--index) * 0.06s);
   }
 
-  .timeline-item:last-child {
-    margin-bottom: 0;
-  }
-
-  .timeline-dot {
-    position: absolute;
-    left: -34px;
-    top: 28px;
-    width: 16px;
-    height: 16px;
-    background: var(--color-primary-500);
-    border: 3px solid white;
-    border-radius: 50%;
-    box-shadow: var(--shadow-md);
-    z-index: 1;
-  }
-
-  @media (min-width: 768px) {
-    .timeline-dot {
-      left: -46px;
-      width: 20px;
-      height: 20px;
+  /* Make the first card span 2 cols (featured) on larger screens */
+  @media (min-width: 1024px) {
+    .grid-item:first-child {
+      grid-column: span 2;
     }
   }
 
-  @keyframes fadeInUp {
+  @keyframes fadeInCard {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  /* ── Responsive header ── */
+  @media (max-width: 640px) {
+    .section-header {
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    .section-title {
+      border-bottom: none;
+      padding-bottom: 0;
     }
   }
 </style>

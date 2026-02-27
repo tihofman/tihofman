@@ -4,7 +4,6 @@ import { getLangFromUrl } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const currentPath = Astro.url.pathname;
 
-// Generate alternate language URL
 const getAlternateUrl = () => {
   if (lang === 'de') {
     return '/en' + currentPath;
@@ -22,9 +21,9 @@ const alternateUrl = getAlternateUrl();
     class="language-toggle"
     aria-label={lang === 'de' ? 'Switch to English' : 'Wechseln zu Deutsch'}
   >
-    <span class:list={['lang-option', { active: lang === 'de' }]}>DE</span>
-    <span class="separator">/</span>
-    <span class:list={['lang-option', { active: lang === 'en' }]}>EN</span>
+    <span class:list={['lang-opt', { active: lang === 'de' }]}>DE</span>
+    <span class="sep" aria-hidden="true">/</span>
+    <span class:list={['lang-opt', { active: lang === 'en' }]}>EN</span>
   </a>
 </div>
 
@@ -33,49 +32,45 @@ const alternateUrl = getAlternateUrl();
     position: fixed;
     top: var(--spacing-lg);
     right: var(--spacing-lg);
-    z-index: 50;
+    z-index: 100;
   }
 
   @media (min-width: 768px) {
     .language-switcher {
-      top: var(--spacing-2xl);
-      right: var(--spacing-2xl);
+      top: var(--spacing-xl);
+      right: var(--spacing-xl);
     }
   }
 
   .language-toggle {
     display: inline-flex;
     align-items: center;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-sm) var(--spacing-md);
-    background: white;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
     text-decoration: none;
-    transition: all var(--transition-base);
-    font-size: 0.875rem;
-    font-weight: 600;
+    transition: border-color var(--transition-base);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
   }
 
   .language-toggle:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
+    border-color: var(--color-accent);
   }
 
-  .lang-option {
-    color: var(--color-neutral-500);
+  .lang-opt {
+    color: var(--color-text-faint);
     transition: color var(--transition-fast);
   }
 
-  .lang-option.active {
-    color: var(--color-primary-600);
+  .lang-opt.active {
+    color: var(--color-accent);
   }
 
-  .separator {
-    color: var(--color-neutral-300);
-  }
-
-  .language-toggle:hover .lang-option:not(.active) {
-    color: var(--color-neutral-700);
+  .sep {
+    color: var(--color-border-2);
   }
 </style>

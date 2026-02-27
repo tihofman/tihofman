@@ -23,6 +23,38 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: 'compeople-2025',
+    role: {
+      de: 'Senior Software Engineer',
+      en: 'Senior Software Engineer'
+    },
+    company: 'compeople AG',
+    timespan: {
+      de: '10/2025 - laufend',
+      en: '10/2025 - Present'
+    },
+    summary: {
+      de: 'Full-Stack-Entwicklung und Architekturberatung in Kundenprojekten.',
+      en: 'Full-stack development and architecture consulting in customer projects.'
+    },
+    responsibilities: {
+      de: [
+        'Entwicklung von Full-Stack-Lösungen für Kundenprojekte',
+        'Architekturplanung und technische Konzeption',
+        'Implementierung moderner Softwarelösungen',
+        'Zusammenarbeit mit interdisziplinären Teams'
+      ],
+      en: [
+        'Development of full-stack solutions for customer projects',
+        'Architectural planning and technical design',
+        'Implementation of modern software solutions',
+        'Collaboration with interdisciplinary teams'
+      ]
+    },
+    keyTech: ['Java', 'Kotlin', 'Spring Boot'],
+    fullTechStack: ['Java', 'Kotlin', 'Spring Boot', 'Microservices', 'REST APIs', 'Git']
+  },
+  {
     id: 'sn-gmbh-2024',
     role: {
       de: 'Senior Software Engineer',
@@ -30,8 +62,8 @@ export const projects: Project[] = [
     },
     company: 'S&N GmbH, Eschborn',
     timespan: {
-      de: '2024 - laufend',
-      en: '2024 - Present'
+      de: '2024 - 09/2025',
+      en: '2024 - 09/2025'
     },
     summary: {
       de: 'Full-Stack-Entwicklung, Architekturplanung und Implementierung in Kundenprojekten.',

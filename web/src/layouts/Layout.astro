@@ -43,8 +43,22 @@ const alternateURL = lang === 'de'
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <div id="scroll-progress"></div>
     <slot />
+    <script>
+      const bar = document.getElementById('scroll-progress');
+      const update = () => {
+        const scrolled = window.scrollY;
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        if (bar) bar.style.width = max > 0 ? `${(scrolled / max) * 100}%` : '0%';
+      };
+      window.addEventListener('scroll', update, { passive: true });
+    </script>
   </body>
 </html>

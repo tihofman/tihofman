@@ -16,131 +16,133 @@ const { project, lang } = Astro.props;
   tabindex="0"
   aria-label={`${project.company} - ${project.role[lang]}`}
 >
-  <div class="project-card-content">
-    <div class="project-header">
-      <h3 class="project-company">{project.company}</h3>
-      <span class="project-timespan">{project.timespan[lang]}</span>
-    </div>
-
-    <p class="project-role">{project.role[lang]}</p>
-
-    <div class="project-tech">
-      {
-        project.keyTech.slice(0, 5).map((tech) => (
-          <span class="tech-tag">{tech}</span>
-        ))
-      }
-    </div>
+  <div class="card-top">
+    <span class="project-timespan">{project.timespan[lang]}</span>
+    <span class="card-arrow" aria-hidden="true">↗</span>
   </div>
 
-  <div class="project-card-arrow">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <polyline points="9 18 15 12 9 6"></polyline>
-    </svg>
+  <h3 class="project-company">{project.company}</h3>
+  <p class="project-role">{project.role[lang]}</p>
+
+  <div class="project-tech">
+    {project.keyTech.slice(0, 4).map((tech) => (
+      <span class="tech-tag">{tech}</span>
+    ))}
   </div>
 </article>
 
 <style>
   .project-card {
-    position: relative;
-    background: white;
-    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
     padding: var(--spacing-xl);
-    box-shadow: var(--shadow-sm);
-    transition: all var(--transition-base);
     cursor: pointer;
+    transition: border-color var(--transition-base), background var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--spacing-lg);
-    border: 2px solid transparent;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--color-accent-glow) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    pointer-events: none;
   }
 
   .project-card:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-4px);
-    border-color: var(--color-primary-200);
+    border-color: var(--color-accent);
+    background: var(--color-surface-2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(232, 168, 56, 0.15);
+  }
+
+  .project-card:hover::before {
+    opacity: 1;
   }
 
   .project-card:focus-visible {
-    outline: 2px solid var(--color-primary-500);
-    outline-offset: 2px;
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
   }
 
-  .project-card-content {
-    flex: 1;
-  }
-
-  .project-header {
+  /* ── Card top row ── */
+  .card-top {
     display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
-    margin-bottom: var(--spacing-md);
-  }
-
-  @media (min-width: 640px) {
-    .project-header {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
-  }
-
-  .project-company {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--color-neutral-900);
-    margin: 0;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
   }
 
   .project-timespan {
-    font-size: 0.875rem;
-    color: var(--color-neutral-600);
-    font-weight: 500;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--color-text-faint);
+    text-transform: uppercase;
+  }
+
+  .card-arrow {
+    font-size: 1rem;
+    color: var(--color-text-faint);
+    transition: color var(--transition-base), transform var(--transition-base);
+    line-height: 1;
+  }
+
+  .project-card:hover .card-arrow {
+    color: var(--color-accent);
+    transform: translate(2px, -2px);
+  }
+
+  /* ── Company & Role ── */
+  .project-company {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--color-text);
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    margin: 0;
   }
 
   .project-role {
-    color: var(--color-primary-700);
-    font-weight: 600;
-    margin-bottom: var(--spacing-md);
-    font-size: 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    margin: 0;
+    margin-top: 0.1rem;
   }
 
+  /* ── Tech tags ── */
   .project-tech {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-xs);
+    margin-top: auto;
+    padding-top: var(--spacing-md);
   }
 
   .tech-tag {
     display: inline-block;
-    padding: 0.25rem 0.75rem;
-    background: var(--color-neutral-100);
-    color: var(--color-neutral-700);
+    padding: 0.2rem 0.6rem;
+    background: transparent;
+    border: 1px solid var(--color-border-2);
     border-radius: var(--radius-sm);
-    font-size: 0.8125rem;
-    font-weight: 500;
     font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--color-text-faint);
+    transition: border-color var(--transition-fast), color var(--transition-fast);
   }
 
-  .project-card-arrow {
-    color: var(--color-neutral-400);
-    transition: all var(--transition-base);
-    flex-shrink: 0;
-  }
-
-  .project-card:hover .project-card-arrow {
-    color: var(--color-primary-600);
-    transform: translateX(4px);
+  .project-card:hover .tech-tag {
+    border-color: rgba(232, 168, 56, 0.3);
+    color: var(--color-text-muted);
   }
 </style>
