@@ -482,5 +482,5 @@ export const skills = [
 export const contactLinks = {
   github: 'https://github.com/tihofman',
   linkedin: 'https://linkedin.com/in/timm-hofmann',
-  email: 'mailto:timm.hofmann@example.com'
+  email: 'mailto:me@tihofman.de'
 };

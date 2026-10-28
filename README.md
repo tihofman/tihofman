@@ -3,6 +3,8 @@
 </p>
 
 <p align="center">
+  <a href="https://tihofman.de"><img src="https://img.shields.io/badge/Website-tihofman.de-e8a838?style=flat-square&logo=astro&logoColor=white&labelColor=0d0d0d" alt="Website" /></a>
+  <a href="mailto:me@tihofman.de"><img src="https://img.shields.io/badge/Email-me%40tihofman.de-0d0d0d?style=flat-square" alt="Email" /></a>
   <a href="https://linkedin.com/in/timm-hofmann-690849180"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
   <a href="https://twitch.tv/kyrilia"><img src="https://img.shields.io/badge/Twitch-9146FF?style=flat-square&logo=twitch&logoColor=white" alt="Twitch" /></a>
 </p>
@@ -37,7 +39,7 @@ enterprise software end to end – from backend architecture and cloud infrastru
 | 07/2023 – 03/2024 | Technical Lead – multi-tenant cloud platform for citizen services | PublicPlan / Land NRW |
 | 12/2022 – 02/2023 | Cloud Architect & DevOps – Kubernetes on Azure, Helm, GitHub Actions | COM Software GmbH |
 
-<sub>Full project history on my personal website – its source lives in [`web/`](web/).</sub>
+<sub>Full project history on my personal website <a href="https://tihofman.de">tihofman.de</a> – its source lives in <a href="web/"><code>web/</code></a>.</sub>
 
 ## 📁 About this repository
 
